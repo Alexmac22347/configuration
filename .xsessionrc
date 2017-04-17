@@ -1,2 +1,13 @@
-xinput --set-prop 12 252 .65
-xinput --set-prop 11 264 -111, -111
+if [ "$XDG_CURRENT_DESKTOP" == "i3" ]
+then
+    xinput --set-prop 12 253 .65
+fi
+if [ "$XDG_CURRENT_DESKTOP" == "XFCE" ]
+then
+    xinput --set-prop 12 253 .65
+fi
+
+xinput --set-prop 11 265 -111, -111
+
+setxkbmap -option ctrl:nocaps
+xset r rate 400 36
