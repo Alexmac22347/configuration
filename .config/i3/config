@@ -172,7 +172,6 @@ hide_edge_borders both
 # finds out, if available)
 bar {
         status_command i3status
-        # status_command i3blocks -c ~/.config/i3/i3blocks.conf
         tray_output primary
 
         colors {
@@ -180,6 +179,12 @@ bar {
         }
 
 }
+
+# Scratchpad settings
+exec --no-startup-id /usr/lib/gnome-terminal/gnome-terminal-server --app-id com.dropdown.terminal --name=dropdown --class=dropdown & gnome-terminal --app-id com.dropdown.terminal
+for_window [class="dropdown" instance="dropdown"] move scratchpad;
+ 
+bindsym $mod+u [class="dropdown" instance="dropdown"] scratchpad show
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -196,7 +201,3 @@ bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
 bindsym XF86AudioPause exec playerctl pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-exec_always feh --bg-scale /home/alex/Pictures/lightbluewallpaper.jpg

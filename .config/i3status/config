@@ -34,7 +34,6 @@ battery all {
         format = "BAT: %percentage %remaining %status"
         hide_seconds = true
         integer_battery_capacity = true
-        status_unk = ""
         status_BAT = ""
 }
 
