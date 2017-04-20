@@ -35,6 +35,7 @@ battery all {
         hide_seconds = true
         integer_battery_capacity = true
         status_BAT = ""
+        status_UNK = ""
 }
 
 tztime local {
