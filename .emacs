@@ -8,3 +8,4 @@
 (setq auto-save-default nil) ; stop creating #autosave# files
 (set-face-attribute 'mode-line nil :box nil)
 (set-face-attribute 'mode-line-inactive nil :box nil)
+(show-paren-mode 1)
