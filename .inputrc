@@ -1,0 +1,5 @@
+# ignore case when using tab complete (similar to Windows Powershell)
+set completion-ignore-case on
+
+# make auto-completion easier
+set show-all-if-ambiguous on
