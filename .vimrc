@@ -88,6 +88,8 @@ syntax enable
 " Grey line numbers
 hi LineNr ctermfg=grey
 
+hi NonText ctermfg=grey
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Files, Backups, and Undo
