@@ -96,11 +96,15 @@ syntax enable
 " Grey line numbers
 hi LineNr ctermfg=grey
 
+" Grey tildes (where text ends)
 hi NonText ctermfg=grey
 
 " Status line colors
 hi StatusLine ctermbg=white ctermfg=black
 hi StatusLineNC ctermbg=white ctermfg=black
+
+" Custom color scheme
+hi Constant ctermfg=12
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -127,10 +131,6 @@ filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set expandtab
-
-" Disable auto-comment
-:set formatoptions-=r
-:set formatoptions-=o
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -213,4 +213,5 @@ augroup reload_vimrc " {
 autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
     autocmd BufWritePost .local.vimrc source .local.vimrc
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=o formatoptions-=r
 augroup END " }
