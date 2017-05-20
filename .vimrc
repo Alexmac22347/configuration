@@ -30,6 +30,13 @@ let g:mapleader = ","
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""
+source ~/.vim/bundle/buftabs.vim
+source ~/.vim/bundle/eunuch.vim
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
 " User Interface
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Enable mouse
@@ -67,7 +74,7 @@ nnoremap <silent><esc> :noh<cr>
 nnoremap <esc>^[ <esc>^[
 
 " Center the cursor
-set scrolloff=999
+set scrolloff=10
 
 " Disable folding
 set nofoldenable
@@ -89,6 +96,10 @@ syntax enable
 hi LineNr ctermfg=grey
 
 hi NonText ctermfg=grey
+
+" Status line colors
+hi StatusLine ctermbg=white ctermfg=black
+hi StatusLineNC ctermbg=white ctermfg=black
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -142,6 +153,9 @@ set statusline+=%L
 " Easy save
 nnoremap <leader>w :w<cr>
 
+" Easy make
+nnoremap <leader>m :make<cr>
+
 " Remap increment and decrement to =/-
 nnoremap = <c-a>
 nnoremap - <c-x>
@@ -163,10 +177,9 @@ nnoremap <c-l> <c-w>l
 
 " Easier buffer keys
 noremap <leader>bd :bd<cr>
+noremap <leader>bda :%bd<cr>
 noremap <c-n> :bp<cr>
 noremap <c-m> :bn<cr>
-" open buffer in vertical split
-noremap <leader>bv :vert sb 
 
 " Useful mappings for managing tabs
 noremap <leader>te :tabedit 
