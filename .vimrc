@@ -34,6 +34,7 @@ let g:mapleader = ","
 """""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/bundle/buftabs.vim
 source ~/.vim/bundle/eunuch.vim
+source ~/.vim/bundle/localrc.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -211,4 +212,5 @@ endfunction
 augroup reload_vimrc " {
 autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
+    autocmd BufWritePost .local.vimrc source .local.vimrc
 augroup END " }
