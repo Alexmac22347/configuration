@@ -32,8 +32,8 @@ let g:mapleader = ","
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
-source ~/.vim/bundle/buftabs.vim
 source ~/.vim/bundle/eunuch.vim
+source ~/.vim/bundle/bclose.vim
 source ~/.vim/bundle/localrc.vim
 
 
@@ -106,6 +106,11 @@ hi StatusLineNC ctermbg=white ctermfg=black
 " Custom color scheme
 hi Constant ctermfg=12
 
+" Get rid of vertical fill chars, also color 
+" vertical split a nicer color
+hi VertSplit ctermfg=black
+set fillchars+=vert:\ 
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Files, Backups, and Undo
@@ -177,8 +182,8 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
 " Easier buffer keys
-noremap <leader>bd :bd<cr>
-noremap <leader>bda :%bd<cr>
+noremap <leader>bd :Kwbd<cr>
+cnoremap bd Kwbd
 noremap <c-n> :bp<cr>
 noremap <c-m> :bn<cr>
 
@@ -194,6 +199,9 @@ noremap <silent><c-p> :tabn<cr>
 
 " opens $MYVIMRC in a new tab
 :nmap <Leader>vim :tabedit $MYVIMRC<cr>
+
+" opens .local.vimrc in a new tab
+:nmap <Leader>local :tabedit .local.vimrc<cr>
 
 " open help in a new tab
 :cabbrev help tab help
