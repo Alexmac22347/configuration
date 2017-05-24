@@ -12,7 +12,7 @@
 set $mod Mod4
 
 # User defined variables
-set $bg-color 	         #0f141f
+set $bg-color 	         #1f242f
 set $inactive-bg-color   #0f141f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
