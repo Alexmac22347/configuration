@@ -32,7 +32,6 @@ let g:mapleader = ","
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
-source ~/.vim/bundle/eunuch.vim
 source ~/.vim/bundle/bclose.vim
 source ~/.vim/bundle/localrc.vim
 
@@ -53,6 +52,7 @@ set cmdheight=1
 set wildmenu
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
+set wildignorecase
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
@@ -102,6 +102,7 @@ hi NonText ctermfg=grey
 " Status line colors
 hi StatusLine ctermbg=white ctermfg=black
 hi StatusLineNC ctermbg=white ctermfg=black
+hi TabLineFill ctermbg=darkgrey
 
 " Custom color scheme
 hi Constant ctermfg=12
@@ -148,6 +149,8 @@ set laststatus=2
 set statusline=%f
 set statusline+=%{DetectChange()}
 set statusline+=%=
+set statusline+=%c
+set statusline+=\ 
 set statusline+=%l
 set statusline+=/
 set statusline+=%L
@@ -159,8 +162,8 @@ set statusline+=%L
 " Easy save
 nnoremap <leader>w :w<cr>
 
-" Easy make
-nnoremap <leader>m :make<cr>
+" Open file explorer where the current file is
+nnoremap <leader>q :Ex<cr>
 
 " Remap increment and decrement to =/-
 nnoremap = <c-a>
@@ -176,21 +179,18 @@ vnoremap <c-a> <Home>
 vnoremap <c-e> <End>h
 
 " Easier window movement
-nnoremap <c-h> <c-w>h
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <c-l> <c-w>l
+nnoremap <silent><c-l> <c-w>l
+nnoremap <silent><c-h> <c-w>h
+nnoremap <silent><c-k> <c-w>k
+nnoremap <silent><c-j> <c-w>j
 
 " Easier buffer keys
 noremap <leader>bd :Kwbd<cr>
-cnoremap bd Kwbd
 noremap <c-n> :bp<cr>
 noremap <c-m> :bn<cr>
 
 " Useful mappings for managing tabs
 noremap <leader>te :tabedit 
-noremap <leader>to :tabonly<cr>
-noremap <leader>tsb :tab sball<cr>
 noremap <silent><c-o> :tabp<cr>
 noremap <silent><c-p> :tabn<cr>
 
@@ -203,11 +203,19 @@ noremap <silent><c-p> :tabn<cr>
 " opens .local.vimrc in a new tab
 :nmap <Leader>local :tabedit .local.vimrc<cr>
 
+" quickly switch to the shell
+noremap <leader>sh :sh<cr>
+
 " open help in a new tab
 :cabbrev help tab help
 
 set pastetoggle=<F2>
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" Netrw
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:netrw_banner = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Helper Functions
