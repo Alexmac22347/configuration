@@ -16,6 +16,7 @@ set nocompatible
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
+set omnifunc=syntaxcomplete#Complete
 
 " Switch buffer even if current buffer has changes
 " without displaying error
@@ -32,8 +33,10 @@ let g:mapleader = ","
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
-source ~/.vim/bundle/bclose.vim
-source ~/.vim/bundle/localrc.vim
+source ~/.vim/plugin/bclose.vim
+source ~/.vim/plugin/localrc.vim
+source ~/.vim/plugin/Rename.vim
+source ~/.vim/plugin/cscope_maps.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""

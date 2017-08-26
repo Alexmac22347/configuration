@@ -129,3 +129,5 @@ fi
 
 # show the git branch
 export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtblu\]\$git_branch\[$txtblu\]\$git_dirty\[$txtrst\]\$ "
+
+alias shlvl='echo $SHLVL'
