@@ -1,3 +1,4 @@
+" This script can close a buffer without closing the window
 "here is a more exotic version of my original Kwbd script
 "delete the buffer; keep windows; create a scratch buffer if no buffers left
 function! s:Kwbd(kwbdStage)
