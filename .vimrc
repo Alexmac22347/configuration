@@ -12,11 +12,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Disable vi backwards compatibility
 set nocompatible
-
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
-set omnifunc=syntaxcomplete#Complete
 
 " Switch buffer even if current buffer has changes
 " without displaying error
@@ -29,14 +27,16 @@ set autoread
 let mapleader = ","
 let g:mapleader = ","
 
+" Execute local .vimrc file in current directory
+set exrc
+set secure
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/plugin/bclose.vim
-source ~/.vim/plugin/localrc.vim
 source ~/.vim/plugin/Rename.vim
-source ~/.vim/plugin/cscope_maps.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
