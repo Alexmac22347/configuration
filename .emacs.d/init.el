@@ -70,9 +70,6 @@
 (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
 (setq eyebrowse-new-workspace t)
 
-;;;;;;;;;;;;;;; Eye-browse
-(eyebrowse-mode t)
-
 ;;;;;;;;;;;;;;; Ido-mode
 (ido-mode t)
 
