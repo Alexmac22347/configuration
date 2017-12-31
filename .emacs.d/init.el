@@ -1,0 +1,131 @@
+;;;;;;;;;;;;;;; Auto
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (vim-dark)))
+ '(custom-safe-themes
+   (quote
+    ("40f69022fdf32999cdb4c7a2254e74c39e18fe501d48563248565524409a83c2" default)))
+ '(package-selected-packages
+   (quote
+    (eyebrowse zygospore projectile magit evil cpputils-cmake))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+;;;;;;;;;;;;;;; MELPA
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+	     '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+
+;;;;;;;;;;;;;;; General
+(tool-bar-mode -1)
+(toggle-scroll-bar -1)
+(set-face-attribute 'mode-line nil :height 100)
+(set-face-attribute 'default nil :height 100)
+(setq make-backup-files nil) ; stop creating backup~ files
+(setq auto-save-default nil) ; stop creating #autosave# files
+(set-face-attribute 'mode-line nil :box nil)
+(set-face-attribute 'mode-line-inactive nil :box nil)
+(show-paren-mode 1)
+(set-face-attribute 'fringe nil :background nil)
+
+;;;;;;;;;;;;;;; Defuns
+(defun use-popup (buffer window-height)
+  (add-to-list 'display-buffer-alist
+               `(,buffer
+                 (display-buffer-reuse-window
+                  display-buffer-below-selected)
+                 (reusable-frames . visible)
+                 (side            . bottom)
+                 (window-height   . ,window-height))))
+
+(defun switch-to-window (buffer-name)
+  (select-window (get-buffer-window buffer-name)))
+
+(defun toggle-window-dedicated ()
+  "Toggle whether the current active window is dedicated or not"
+  (interactive)
+  (message 
+    (if (let (window (get-buffer-window (current-buffer)))
+          (set-window-dedicated-p window 
+           (not (window-dedicated-p window))))
+       "Window '%s' is dedicated"
+       "Window '%s' is normal")
+    (current-buffer)))
+
+;;;;;;;;;;;;;;; Eye-browse
+(eyebrowse-mode t)
+(define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
+(define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
+(define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
+(define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
+(setq eyebrowse-new-workspace t)
+
+;;;;;;;;;;;;;;; Eye-browse
+(eyebrowse-mode t)
+
+;;;;;;;;;;;;;;; Ido-mode
+(ido-mode t)
+
+;;;;;;;;;;;;;;; Electric pair
+(electric-pair-mode 1)
+
+;;;;;;;;;;;;;;; Evil
+(require 'evil)
+(evil-mode 1)
+(with-eval-after-load 'evil
+  (defalias #'forward-evil-word #'forward-evil-symbol))
+
+;;;;;;;;;;;;;;; cpputils-cmake
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (if (derived-mode-p 'c-mode 'c++-mode)
+                (cppcm-reload-all)
+              )))
+
+;;;;;;;;;;;;;;; GDB
+(defadvice gdb-inferior-filter
+    (around gdb-inferior-filter-without-stealing)
+  (with-current-buffer (gdb-get-buffer-create 'gdb-inferior-io)
+    (comint-output-filter proc string)))
+(ad-activate 'gdb-inferior-filter)
+
+;;;;;;;;;;;;;;; Window configurations
+(use-popup (rx bos "*magit:") .4)
+(use-popup (rx bos "*compilation*") .3)
+(defun switch-to-compilation-window
+  (command &optional comint)
+  (switch-to-window "*compilation*"))
+(advice-add 'compile :after 'switch-to-compilation-window)
+(add-to-list 'display-buffer-alist
+             '("*Help*" display-buffer-same-window))
+(add-to-list 'display-buffer-alist
+             '("*Buffer List*" display-buffer-same-window))
+
+;;;;;;;;;;;;;;; Keybindings
+(global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
+(global-set-key (kbd "\C-c y") 'clipboard-yank)
+(global-set-key (kbd "\C-c e b") 'eval-buffer)
+(global-set-key (kbd "\C-c c") 'compile)
+(global-set-key (kbd "\C-c w d") 'toggle-window-dedicated)
+(global-set-key (kbd "\C-x\C-d") 'ido-dired)
+(global-set-key (kbd "\C-x\C-k") 'kill-buffer-and-window)
+(global-set-key (kbd "C-x g") 'magit-status)
+;; Evil keybindings
+(define-key evil-motion-state-map (kbd "C-a") 'evil-beginning-of-line)
+(define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-line)
+(define-key evil-window-map "o" 'zygospore-toggle-delete-other-windows)
+(define-key evil-visual-state-map (kbd "C-e") 'evil-end-of-visual-line)
+(global-set-key "\C-u" 'evil-scroll-up)
+
+;;;;;;;;;;;;;;; Hooks
+(add-hook 'find-file-hook 'linum-mode)
