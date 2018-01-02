@@ -12,9 +12,7 @@
  '(custom-safe-themes
    (quote
     ("40f69022fdf32999cdb4c7a2254e74c39e18fe501d48563248565524409a83c2" default)))
- '(package-selected-packages
-   (quote
-    (project-persist eyebrowse zygospore projectile magit evil cpputils-cmake))))
+ '(package-selected-packages (quote (eyebrowse zygospore magit evil cpputils-cmake))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -68,6 +66,9 @@
        "Window '%s' is normal")
     (current-buffer)))
 
+(defun shell-command-from-proj-root (command)
+  (shell-command (concat "cd " project-persist-current-project-root-dir " && " command)))
+
 ;;;;;;;;;;;;;;; Eye-browse
 (eyebrowse-mode t)
 (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
@@ -101,7 +102,7 @@
       )))
 
 ;;;;;;;;;;;;;;; Projectile
-(projectile-global-mode)
+;(projectile-global-mode)
 
 ;;;;;;;;;;;;;;; GDB
 (defadvice gdb-inferior-filter
@@ -113,6 +114,7 @@
 ;;;;;;;;;;;;;;; Window configurations
 (use-popup (rx bos "*magit:") .4)
 (use-popup (rx bos "*compilation*") .3)
+(use-popup (rx bos "*Async Shell Command*") .3)
 
 (defun switch-to-compilation-window
   (command &optional comint)
@@ -135,7 +137,7 @@
 (global-set-key (kbd "\C-x\C-d") 'ido-dired)
 (global-set-key (kbd "\C-x\C-k") 'kill-buffer-and-window)
 (global-set-key (kbd "C-x g") 'magit-status)
-;; Evil keybindings
+;;; Evil keybindings
 (define-key evil-motion-state-map (kbd "C-a") 'evil-beginning-of-line)
 (define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-line)
 (define-key evil-window-map "o" 'zygospore-toggle-delete-other-windows)
@@ -143,34 +145,23 @@
   (lambda ()
     (interactive)
     (evil-end-of-visual-line)))
-;; project-persist
+
+(global-set-key "\C-u" 'evil-scroll-up)
+; project-persist
 (defun print-current-project-name ()
   (interactive)
   (message project-persist-current-project-name))
-(global-set-key (kbd "\C-c P p") 'print-current-project-name)
+(global-set-key (kbd "\C-c p p") 'print-current-project-name)
 
-
-;'evil-end-of-visual-line)
-(global-set-key "\C-u" 'evil-scroll-up)
 
 ;;;;;;;;;;;;;;; Hooks
 (add-hook 'find-file-hook 'linum-mode)
-;; project-persist
-(setq desktops-folder "~/.emacs.d/desktops/")
-(add-hook 'project-persist-after-create-hook
-          (lambda ()
-            (make-directory (concat desktops-folder project-persist-current-project-name) t)
-            (desktop-save
-             (concat desktops-folder project-persist-current-project-name))))
-(add-hook 'project-persist-after-load-hook
-          (lambda ()
-            (desktop-read
-             (concat desktops-folder project-persist-current-project-name))))
+; project-persist hooks
 (add-hook 'project-persist-after-save-hook
           (lambda ()
-            (desktop-save
-             (concat desktops-folder project-persist-current-project-name))))
-(add-hook 'project-persist-after-close-hook
+            (desktop-save project-persist-current-project-settings-dir)))
+(add-hook 'project-persist-after-load-hook
           (lambda ()
-            (desktop-save
-             (concat desktops-folder project-persist-current-project-name))))
+            (desktop-read project-persist-current-project-settings-dir)
+            (when (file-exists-p (concat project-persist-current-project-settings-dir "/init.el"))
+              (load (concat project-persist-current-project-settings-dir "/init.el")))))
