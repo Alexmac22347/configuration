@@ -4,13 +4,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
  '(custom-enabled-themes (quote (vim-dark)))
  '(custom-safe-themes
    (quote
     ("40f69022fdf32999cdb4c7a2254e74c39e18fe501d48563248565524409a83c2" default)))
  '(package-selected-packages
    (quote
-    (eyebrowse zygospore projectile magit evil cpputils-cmake))))
+    (project-persist eyebrowse zygospore projectile magit evil cpputils-cmake))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -37,6 +41,8 @@
 (set-face-attribute 'mode-line-inactive nil :box nil)
 (show-paren-mode 1)
 (set-face-attribute 'fringe nil :background nil)
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(setq-default indent-tabs-mode nil)
 
 ;;;;;;;;;;;;;;; Defuns
 (defun use-popup (buffer window-height)
@@ -70,6 +76,11 @@
 (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
 (setq eyebrowse-new-workspace t)
 
+;;;;;;;;;;;;;;; project-persist
+(require 'desktop)
+(require 'project-persist)
+(project-persist-mode t)
+
 ;;;;;;;;;;;;;;; Ido-mode
 (ido-mode t)
 
@@ -84,10 +95,13 @@
 
 ;;;;;;;;;;;;;;; cpputils-cmake
 (add-hook 'c-mode-common-hook
-          (lambda ()
-            (if (derived-mode-p 'c-mode 'c++-mode)
-                (cppcm-reload-all)
-              )))
+  (lambda ()
+    (if (derived-mode-p 'c-mode 'c++-mode)
+        (cppcm-reload-all)
+      )))
+
+;;;;;;;;;;;;;;; Projectile
+(projectile-global-mode)
 
 ;;;;;;;;;;;;;;; GDB
 (defadvice gdb-inferior-filter
@@ -99,14 +113,18 @@
 ;;;;;;;;;;;;;;; Window configurations
 (use-popup (rx bos "*magit:") .4)
 (use-popup (rx bos "*compilation*") .3)
+
 (defun switch-to-compilation-window
   (command &optional comint)
   (switch-to-window "*compilation*"))
 (advice-add 'compile :after 'switch-to-compilation-window)
+
 (add-to-list 'display-buffer-alist
              '("*Help*" display-buffer-same-window))
 (add-to-list 'display-buffer-alist
              '("*Buffer List*" display-buffer-same-window))
+(add-to-list 'display-buffer-alist
+             '("*shell*" display-buffer-same-window))
 
 ;;;;;;;;;;;;;;; Keybindings
 (global-set-key (kbd "C-x 1") 'zygospore-toggle-delete-other-windows)
@@ -121,8 +139,38 @@
 (define-key evil-motion-state-map (kbd "C-a") 'evil-beginning-of-line)
 (define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-line)
 (define-key evil-window-map "o" 'zygospore-toggle-delete-other-windows)
-(define-key evil-visual-state-map (kbd "C-e") 'evil-end-of-visual-line)
+(define-key evil-visual-state-map (kbd "C-e")
+  (lambda ()
+    (interactive)
+    (evil-end-of-visual-line)))
+;; project-persist
+(defun print-current-project-name ()
+  (interactive)
+  (message project-persist-current-project-name))
+(global-set-key (kbd "\C-c P p") 'print-current-project-name)
+
+
+;'evil-end-of-visual-line)
 (global-set-key "\C-u" 'evil-scroll-up)
 
 ;;;;;;;;;;;;;;; Hooks
 (add-hook 'find-file-hook 'linum-mode)
+;; project-persist
+(setq desktops-folder "~/.emacs.d/desktops/")
+(add-hook 'project-persist-after-create-hook
+          (lambda ()
+            (make-directory (concat desktops-folder project-persist-current-project-name) t)
+            (desktop-save
+             (concat desktops-folder project-persist-current-project-name))))
+(add-hook 'project-persist-after-load-hook
+          (lambda ()
+            (desktop-read
+             (concat desktops-folder project-persist-current-project-name))))
+(add-hook 'project-persist-after-save-hook
+          (lambda ()
+            (desktop-save
+             (concat desktops-folder project-persist-current-project-name))))
+(add-hook 'project-persist-after-close-hook
+          (lambda ()
+            (desktop-save
+             (concat desktops-folder project-persist-current-project-name))))
