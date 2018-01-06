@@ -1,4 +1,4 @@
-;;; project-persist.el --- A minor mode to allow loading and saving of project settings.
+;; project-persist.el --- A minor mode to allow loading and saving of project settings.
 
 ;; Copyright (C) @YEAR Robert Dallas Gray
 
@@ -43,7 +43,7 @@
   :type 'directory
   :group 'project-persist)
 
-(defcustom project-persist-keymap-prefix (kbd "C-c p")
+(defcustom project-persist-keymap-prefix (kbd "C-c P")
   "Project-persist keymap prefix."
   :type 'sexp
   :group 'project-persist)
@@ -387,7 +387,7 @@ Create the project-persist root settings directory if necessary."
 (define-minor-mode project-persist-mode
   "A minor mode to allow loading and saving of project settings."
   :global t
-  :lighter project-persist--lighter
+;  :lighter project-persist--lighter
   :keymap project-persist-mode-map
   :group 'project-persist
   (unless project-persist-mode
