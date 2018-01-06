@@ -46,6 +46,14 @@
 (setq-default c-basic-offset 4)
 
 ;;;;;;;;;;;;;;; Defuns
+(defun print-current-project-name ()
+  (interactive)
+  (message project-persist-current-project-name))
+
+(defun shell-command-from-proj-root (command)
+  (shell-command
+   (concat "cd " project-persist-current-project-root-dir " && " command)))
+
 (defun duplicate-line()
   (interactive)
   (move-beginning-of-line 1)
@@ -67,9 +75,16 @@
 (defun switch-to-window (buffer-name)
   (select-window (get-buffer-window buffer-name)))
 
+;;;;;;;;;;;;;;; project-persist
+(require 'desktop)
+(require 'project-persist)
+(project-persist-mode t)
+
 ;;;;;;;;;;;;;; rtags
 (require 'rtags)
 (rtags-enable-standard-keybindings)
+(define-key c-mode-base-map (kbd "M-.") (function rtags-find-symbol-at-point))
+(define-key c-mode-base-map (kbd "M-,") (function rtags-find-references-at-point))
 
 ;;;;;;;;;;;;;; cmake-ide
 (cmake-ide-setup)
@@ -91,6 +106,8 @@
 
 ;;;;;;;;;;;;;;; Projectile
 (projectile-global-mode t)
+;; Disable some useless commands
+(global-unset-key (kbd "\C-c p R"))
 
 ;;;;;;;;;;;;;;; GDB
 (defadvice gdb-inferior-filter
@@ -127,9 +144,23 @@
 (global-set-key (kbd "\C-c g") 'magit-status)
 (global-set-key (kbd "\C-c \C-d") 'duplicate-line)
 (global-set-key (kbd "\C-c \C-y") 'copy-line)
+(global-set-key (kbd "\C-c P p") 'print-current-project-name)
 (bind-key* (kbd "\C-o") 'other-window)
 (global-set-key (kbd "\C-x o") 'ff-find-other-file)
 (global-set-key (kbd "\C-x \C-o") (lambda () (interactive) (ff-find-other-file t)))
 
 ;;;;;;;;;;;;;;; Hooks
 (add-hook 'find-file-hook 'linum-mode)
+; project-persist hooks
+(add-hook 'project-persist-after-save-hook
+          (lambda ()
+            (desktop-save project-persist-current-project-settings-dir)))
+(add-hook 'project-persist-after-load-hook
+          (lambda ()
+            (desktop-read project-persist-current-project-settings-dir)
+            (when (file-exists-p (concat project-persist-current-project-settings-dir "/init.el"))
+              (load (concat project-persist-current-project-settings-dir "/init.el")))))
+
+(add-hook 'project-persist-before-close-hook
+          (lambda ()
+            (message (concat "closed " project-persist-current-project-name))))
