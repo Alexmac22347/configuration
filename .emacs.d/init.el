@@ -14,7 +14,7 @@
     ("40f69022fdf32999cdb4c7a2254e74c39e18fe501d48563248565524409a83c2" default)))
  '(package-selected-packages
    (quote
-    (use-package projectile eyebrowse zygospore magit cpputils-cmake))))
+    (rtags cmake-ide use-package projectile eyebrowse zygospore magit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -46,10 +46,6 @@
 (setq-default c-basic-offset 4)
 
 ;;;;;;;;;;;;;;; Defuns
-(defun print-current-project-name ()
-  (interactive)
-  (message project-persist-current-project-name))
-
 (defun duplicate-line()
   (interactive)
   (move-beginning-of-line 1)
@@ -71,10 +67,14 @@
 (defun switch-to-window (buffer-name)
   (select-window (get-buffer-window buffer-name)))
 
-(defun shell-command-from-proj-root (command)
-  (shell-command (concat "cd " project-persist-current-project-root-dir " && " command)))
+;;;;;;;;;;;;;; rtags
+(require 'rtags)
+(rtags-enable-standard-keybindings)
 
-;;;;;;;;;;;;;;; Eye-browse
+;;;;;;;;;;;;;; cmake-ide
+(cmake-ide-setup)
+
+;;;;;;;;;;;;;; Eye-browse
 (eyebrowse-mode t)
 (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
 (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
@@ -83,28 +83,11 @@
 (setq eyebrowse-new-workspace t)
 (setq eyebrowse-mode-line-style nil)
 
-;;;;;;;;;;;;;;; project-persist
-(require 'desktop)
-(require 'project-persist)
-(project-persist-mode t)
-
 ;;;;;;;;;;;;;;; Ido-mode
 (ido-mode t)
 
 ;;;;;;;;;;;;;;; Electric pair
 (electric-pair-mode 1)
-
-;;;;;;;;;;;;;;; Evil
-;(require 'evil)
-;(evil-mode 1)
-;(with-eval-after-load 'evil
-;  (defalias #'forward-evil-word #'forward-evil-symbol))
-
-;;;;;;;;;;;;;;; cpputils-cmake
-(add-hook 'c-mode-common-hook
-  (lambda ()
-    (if (derived-mode-p 'c-mode 'c++-mode)
-        (cppcm-reload-all))))
 
 ;;;;;;;;;;;;;;; Projectile
 (projectile-global-mode t)
@@ -117,8 +100,6 @@
 (ad-activate 'gdb-inferior-filter)
 
 ;;;;;;;;;;;;;;; Window configurations
-;(use-popup (rx bos "*magit:") .4)
-;(use-popup (rx bos "*compilation*") .3)
 (use-popup (rx bos "*Async Shell Command*") .3)
 
 (defun switch-to-compilation-window
@@ -140,42 +121,15 @@
 (global-set-key "\M-u" 'undo)
 (global-set-key (kbd "\C-c y") 'clipboard-yank)
 (global-set-key (kbd "\C-c e b") 'eval-buffer)
-(global-set-key (kbd "\C-c c") 'compile)
+(global-set-key (kbd "\C-c c") 'cmake-ide-compile)
 (global-set-key (kbd "\C-x\C-d") 'ido-dired)
 (global-set-key (kbd "\C-x\C-k") 'kill-buffer-and-window)
 (global-set-key (kbd "\C-c g") 'magit-status)
 (global-set-key (kbd "\C-c \C-d") 'duplicate-line)
 (global-set-key (kbd "\C-c \C-y") 'copy-line)
-(global-set-key (kbd "\C-c p p") 'print-current-project-name)
 (bind-key* (kbd "\C-o") 'other-window)
 (global-set-key (kbd "\C-x o") 'ff-find-other-file)
 (global-set-key (kbd "\C-x \C-o") (lambda () (interactive) (ff-find-other-file t)))
 
-;;; Evil keybindings
-;(define-key evil-motion-state-map (kbd "C-a") 'evil-beginning-of-line)
-;(define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-line)
-;(define-key evil-window-map "o" 'zygospore-toggle-delete-other-windows)
-;(define-key evil-visual-state-map (kbd "C-e")
-;  (lambda ()
-;    (interactive)
-;    (evil-end-of-visual-line)))
-;
-;(global-set-key "\C-u" 'evil-scroll-up)
-; project-persist
-
-
 ;;;;;;;;;;;;;;; Hooks
 (add-hook 'find-file-hook 'linum-mode)
-; project-persist hooks
-(add-hook 'project-persist-after-save-hook
-          (lambda ()
-            (desktop-save project-persist-current-project-settings-dir)))
-(add-hook 'project-persist-after-load-hook
-          (lambda ()
-            (desktop-read project-persist-current-project-settings-dir)
-            (when (file-exists-p (concat project-persist-current-project-settings-dir "/init.el"))
-              (load (concat project-persist-current-project-settings-dir "/init.el")))))
-
-(add-hook 'project-persist-before-close-hook
-          (lambda ()
-            (message (concat "closed " project-persist-current-project-name))))
