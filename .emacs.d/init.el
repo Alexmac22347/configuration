@@ -63,6 +63,10 @@
   (next-line 1)
   (yank))
 
+(defun copy-line ()
+  (interactive)
+  (kill-ring-save (point-at-bol) (point-at-eol)))
+
 (defun use-popup (buffer window-height)
   (add-to-list 'display-buffer-alist
                `(,buffer
