@@ -13,4 +13,10 @@
 
 /usr/sbin/powertop --auto-tune
 
+# start pulseaudio in power save mode
+echo 1 | tee /sys/module/snd_hda_intel/parameters/power_save
+echo Y | tee /sys/module/snd_hda_intel/parameters/power_save_controller
+pkill pulseaudio
+pulseaudio --start
+
 exit 0
