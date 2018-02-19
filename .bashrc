@@ -123,3 +123,14 @@ fi
 export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtblu\]\$git_branch\[$txtblu\]\$git_dirty\[$txtrst\]\$ "
 
 alias shlvl='echo $SHLVL'
+
+export QSYS_ROOTDIR="/home/alex/altera/15.0/quartus/sopc_builder/bin"
+
+export ALTERAOCLSDKROOT="/home/alex/altera/15.0/hld"
+
+
+# Add some stuff to the path
+export PATH=$PATH:/home/alex/altera/15.0/nios2eds/sdk2/bin/:/home/alex/altera/15.0/nios2eds/bin/:/home/alex/altera/15.0/nios2eds/bin/gnu/H-x86_64-pc-linux-gnu/bin/:/home/alex/altera/15.0/quartus/bin
+
+# more aliases
+alias copy='xsel -ib'

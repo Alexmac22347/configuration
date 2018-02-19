@@ -37,6 +37,19 @@ set secure
 """""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/plugin/bclose.vim
 source ~/.vim/plugin/Rename.vim
+source ~/.vim/plugin/cscope_maps.vim
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -83,6 +96,8 @@ set scrolloff=10
 " Disable folding
 set nofoldenable
 
+set completeopt-=preview
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Environment
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,6 +130,8 @@ hi Constant ctermfg=12
 hi VertSplit ctermfg=black
 set fillchars+=vert:\ 
 
+" Colorless gutter (same color as background)
+highlight clear SignColumn
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Files, Backups, and Undo
@@ -187,6 +204,11 @@ nnoremap <silent><c-h> <c-w>h
 nnoremap <silent><c-k> <c-w>k
 nnoremap <silent><c-j> <c-w>j
 
+" Toggle max window
+nnoremap <C-W>O :call MaximizeToggle()<CR>
+nnoremap <C-W>o :call MaximizeToggle()<CR>
+nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
+
 " Easier buffer keys
 noremap <leader>bd :Kwbd<cr>
 noremap <c-n> :bp<cr>
@@ -221,6 +243,17 @@ set pastetoggle=<F2>
 let g:netrw_banner = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe
+""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_auto_trigger = 0
+let g:ycm_key_invoke_completion = '<C-x><C-o>'
+let g:ycm_error_symbol = 'er'
+let g:ycm_warning_symbol = 'wn'
+let g:ycm_enable_diagnostic_highlighting = 0
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helper Functions
 """"""""""""""""""""""""""""""""""""""""""""""""""
 function! DetectChange()
@@ -234,3 +267,20 @@ autocmd!
     autocmd BufWritePost .local.vimrc source .local.vimrc
     autocmd FileType * setlocal formatoptions-=c formatoptions-=o formatoptions-=r
 augroup END " }
+
+
+function! MaximizeToggle()
+  if exists("s:maximize_session")
+    exec "source " . s:maximize_session
+    call delete(s:maximize_session)
+    unlet s:maximize_session
+    let &hidden=s:maximize_hidden_save
+    unlet s:maximize_hidden_save
+  else
+    let s:maximize_hidden_save = &hidden
+    let s:maximize_session = tempname()
+    set hidden
+    exec "mksession! " . s:maximize_session
+    only
+  endif
+endfunction
