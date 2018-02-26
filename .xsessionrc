@@ -1,8 +1,8 @@
 TOUCHPAD_ID=`xinput --list | grep "TouchPad" | grep '=[0-9]*' -o | cut -c 2-`
 TRACKPOINT_ID=`xinput --list | grep "TrackPoint" | grep '=[0-9]*' -o | cut -c 2-`
 
-xinput --set-prop $TRACKPOINT_ID 264 .65 # increase trackpoint sensitivity
-xinput --set-prop $TOUCHPAD_ID 276 -111, -111 # reverse scrolling
+xinput --set-prop $TRACKPOINT_ID 266 .65 # increase trackpoint sensitivity
+xinput --set-prop $TOUCHPAD_ID 278 -200, -200 # reverse scrolling
 
 setxkbmap -option ctrl:nocaps
 xset r rate 240 40
