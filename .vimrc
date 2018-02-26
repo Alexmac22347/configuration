@@ -33,6 +33,12 @@ set secure
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
+" GUI
+"""""""""""""""""""""""""""""""""""""""""""""""""
+set guioptions-=T
+set guioptions-=r
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/plugin/bclose.vim
@@ -133,6 +139,9 @@ set fillchars+=vert:\
 " Colorless gutter (same color as background)
 highlight clear SignColumn
 
+" Change tab bar color
+:hi TabLineFill ctermfg=Black
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Files, Backups, and Undo
 """"""""""""""""""""""""""""""""""""""""""""""""""
@@ -204,11 +213,6 @@ nnoremap <silent><c-h> <c-w>h
 nnoremap <silent><c-k> <c-w>k
 nnoremap <silent><c-j> <c-w>j
 
-" Toggle max window
-nnoremap <C-W>O :call MaximizeToggle()<CR>
-nnoremap <C-W>o :call MaximizeToggle()<CR>
-nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
-
 " Easier buffer keys
 noremap <leader>bd :Kwbd<cr>
 noremap <c-n> :bp<cr>
@@ -230,6 +234,10 @@ noremap <silent><c-p> :tabn<cr>
 
 " quickly switch to the shell
 noremap <leader>sh :sh<cr>
+
+" easy yank/paste from clipboard
+noremap <leader>y "+y
+noremap <leader>p "*p
 
 " open help in a new tab
 :cabbrev help tab help
@@ -267,20 +275,3 @@ autocmd!
     autocmd BufWritePost .local.vimrc source .local.vimrc
     autocmd FileType * setlocal formatoptions-=c formatoptions-=o formatoptions-=r
 augroup END " }
-
-
-function! MaximizeToggle()
-  if exists("s:maximize_session")
-    exec "source " . s:maximize_session
-    call delete(s:maximize_session)
-    unlet s:maximize_session
-    let &hidden=s:maximize_hidden_save
-    unlet s:maximize_hidden_save
-  else
-    let s:maximize_hidden_save = &hidden
-    let s:maximize_session = tempname()
-    set hidden
-    exec "mksession! " . s:maximize_session
-    only
-  endif
-endfunction
