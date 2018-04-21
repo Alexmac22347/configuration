@@ -173,6 +173,7 @@ hide_edge_borders both
 bar {
         status_command i3status
         tray_output primary
+#        position top
 
         colors {
             background $inactive-bg-color
@@ -188,11 +189,10 @@ bindsym Print exec scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.pn
 bindsym Shift+Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # Scratchpad settings
-exec --no-startup-id /usr/lib/gnome-terminal/gnome-terminal-server --app-id com.popup.terminal --name=popup --class=popup & gnome-terminal --app-id com.popup.terminal
-for_window [class="popup" instance="popup"] move scratchpad;
- 
-bindsym $mod+u exec ~/.config/i3/show-popup-terminal.sh
-# bindsym $mod+u [class="dropdown" instance="dropdown"] scratchpad show;
+# This stuff needs to be changed to use rxvt
+#exec --no-startup-id /usr/lib/gnome-terminal/gnome-terminal-server --app-id com.popup.terminal --name=popup --class=popup & gnome-terminal --app-id com.popup.terminal
+#for_window [class="popup" instance="popup"] move scratchpad;
+#bindsym $mod+u exec ~/.config/i3/show-popup-terminal.sh
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/increase-volume.sh #increase sound volume but don't go over 100%
@@ -200,8 +200,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #d
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 15 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 15 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
