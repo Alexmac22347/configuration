@@ -23,6 +23,9 @@ set $urgent-bg-color     #E53935
 # font pango:monospace 8
 font pango:System San Francisco Display 8
 
+# Hide the title bar
+for_window [class="^.*"] border pixel 1
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 # font pango:DejaVu Sans Mono 8
@@ -42,6 +45,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+# Don't wrap focus around
+force_focus_wrapping no
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -nb '$inactive-bg-color' -nf '$inactive-text-color' -sb '$bg-color' -sf '$text-color'
@@ -193,6 +199,10 @@ bindsym Shift+Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:
 #exec --no-startup-id /usr/lib/gnome-terminal/gnome-terminal-server --app-id com.popup.terminal --name=popup --class=popup & gnome-terminal --app-id com.popup.terminal
 #for_window [class="popup" instance="popup"] move scratchpad;
 #bindsym $mod+u exec ~/.config/i3/show-popup-terminal.sh
+exec rxvt -title popppup
+for_window [instance="popppup"] floating enable;
+bindsym $mod+t [instance="popppup"] scratchpad show
+for_window [instance="popppup"] move scratchpad; [instance="popppup"] scratchpad show; move position 0px 0px; resize shrink height 150px; resize grow width 560px; move scratchpad;
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/increase-volume.sh #increase sound volume but don't go over 100%
