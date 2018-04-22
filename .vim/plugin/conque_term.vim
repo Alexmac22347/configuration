@@ -212,10 +212,10 @@ let g:ConqueTerm_Loaded = 1
 let g:ConqueTerm_Idx = 0
 let g:ConqueTerm_Version = 230
 
-command! -nargs=+ -complete=shellcmd ConqueTerm call conque_term#open(<q-args>)
-command! -nargs=+ -complete=shellcmd ConqueTermSplit call conque_term#open(<q-args>, ['belowright split'])
-command! -nargs=+ -complete=shellcmd ConqueTermVSplit call conque_term#open(<q-args>, ['belowright vsplit'])
-command! -nargs=+ -complete=shellcmd ConqueTermTab call conque_term#open(<q-args>, ['tabnew'])
+command! -nargs=+ -complete=shellcmd Term call conque_term#open(<q-args>)
+"command! -nargs=+ -complete=shellcmd ConqueTermSplit call conque_term#open(<q-args>, ['belowright split'])
+"command! -nargs=+ -complete=shellcmd ConqueTermVSplit call conque_term#open(<q-args>, ['belowright vsplit'])
+"command! -nargs=+ -complete=shellcmd ConqueTermTab call conque_term#open(<q-args>, ['tabnew'])
 
 " }}}
 
@@ -234,8 +234,5 @@ if maparg(g:ConqueTerm_ExecFileKey, 'n') == ''
 endif
 
 " }}}
-
-" Command for pasting contents of previous register.
-command! -nargs=0 ConqueTermPaste sil exe ':normal a' . @"
 
 " vim:foldmethod=marker
