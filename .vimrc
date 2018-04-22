@@ -125,22 +125,25 @@ hi NonText ctermfg=grey
 
 " Status line colors
 hi StatusLine ctermbg=white ctermfg=black
-hi StatusLineNC ctermbg=white ctermfg=black
+"hi StatusLineNC ctermbg=white ctermfg=black
+hi clear StatusLineNC
 hi TabLineFill ctermbg=darkgrey
 
 " Custom color scheme
 hi Constant ctermfg=12
 
-" Get rid of vertical fill chars, also color 
+" Get rid of vertical fill chars, also color
 " vertical split a nicer color
-hi VertSplit ctermfg=black
-set fillchars+=vert:\ 
+hi clear VertSplit
+set fillchars=""
 
 " Colorless gutter (same color as background)
 highlight clear SignColumn
 
-" Change tab bar color
-:hi TabLineFill ctermfg=Black
+" Colorless tab bar
+highlight clear TabLineFill
+highlight clear Tabline
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Files, Backups, and Undo

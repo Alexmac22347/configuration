@@ -48,3 +48,11 @@ URxvt.keysym.C-S-0x56: eval:paste_clipboard
 URxvt.perl-ext-common:  default,matcher
 URxvt.urlLauncher:      /usr/bin/chromium-browser
 URxvt.matcher.button:   3
+
+! Transparent background
+URxvt.transparent:   true
+URxvt.tintColor:     white
+URxvt.shading:       30 
+
+! Hide pointer
+URxvt.pointerBlank: true
