@@ -69,13 +69,13 @@ let s:term_object = ''
 let s:orig_gdb_path = g:ConqueGdb_GdbExe
 
 " Define the current gdb break point sign
-sil exe 'sign define ' . s:SIGN_POINTER . ' linehl=Search'
+sil exe 'sign define ' . s:SIGN_POINTER . ' text=->'
 
 " Define sign for enabled break points
-sil exe 'sign define ' . s:SIGN_ENABLED . ' text=>> texthl=ErrorMsg'
+sil exe 'sign define ' . s:SIGN_ENABLED . ' text= ●'
 
 " Define sign for disabled break points
-sil exe 'sign define ' . s:SIGN_DISABLED . ' text=>> texthl=WarningMsg'
+sil exe 'sign define ' . s:SIGN_DISABLED . ' text= ○'
 
 " How to escape file names before passing them to python.
 function! s:escape_to_py_file(fname)
