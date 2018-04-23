@@ -47,7 +47,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # Don't wrap focus around
-force_focus_wrapping no
+focus_wrapping no
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run -nb '$inactive-bg-color' -nf '$inactive-text-color' -sb '$bg-color' -sf '$text-color'
