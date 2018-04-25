@@ -190,19 +190,14 @@ bar {
 # nm-applet
 exec --no-startup-id /usr/bin/nm-applet
 
-#PrintScreen
+# Popup terminal
+exec --no-startup-id urxvt -name scratchpad_urxvt
+for_window [instance="scratchpad_urxvt"] move scratchpad;
+bindsym $mod+u exec ~/.config/i3/show-popup-terminal.sh
+
+# PrintScreen
 bindsym Print exec scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 bindsym Shift+Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
-
-# Scratchpad settings
-# This stuff needs to be changed to use rxvt
-#exec --no-startup-id /usr/lib/gnome-terminal/gnome-terminal-server --app-id com.popup.terminal --name=popup --class=popup & gnome-terminal --app-id com.popup.terminal
-#for_window [class="popup" instance="popup"] move scratchpad;
-#bindsym $mod+u exec ~/.config/i3/show-popup-terminal.sh
-exec rxvt -title popppup
-for_window [instance="popppup"] floating enable;
-bindsym $mod+t [instance="popppup"] scratchpad show
-for_window [instance="popppup"] move scratchpad; [instance="popppup"] scratchpad show; move position 0px 0px; resize shrink height 150px; resize grow width 560px; move scratchpad;
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/increase-volume.sh #increase sound volume but don't go over 100%
