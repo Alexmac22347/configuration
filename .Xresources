@@ -2,7 +2,8 @@ URxvt.scrollBar: false
 URxvt.font: xft:monospace:size=9
 URxvt.letterSpace: -1
 
-! to match gnome-terminal "Linux console" scheme
+
+! to.match gnome-terminal "Linux console" scheme
 ! foreground/background
 URxvt*background: #000000
 URxvt*foreground: #ffffff
@@ -16,7 +17,7 @@ URxvt.color9  : #FF5555
 URxvt.color2  : #00AA00
 URxvt.color10 : #55FF55
 ! yellow
-URxvt.color3  : #AA5500
+URxvt.color3  : #C4A000
 URxvt.color11 : #FFFF55
 ! blue
 URxvt.color4  : #0000AA
@@ -50,9 +51,9 @@ URxvt.urlLauncher:      /usr/bin/chromium-browser
 URxvt.matcher.button:   3
 
 ! Transparent background
-URxvt.transparent:   true
+URxvt.transparent:   false
 URxvt.tintColor:     white
-URxvt.shading:       30 
+URxvt.shading:       20 
 
 ! Hide pointer
 URxvt.pointerBlank: true
