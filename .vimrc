@@ -31,6 +31,9 @@ let g:mapleader = ","
 set exrc
 set secure
 
+" Unicode OK
+set encoding=utf-8
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " GUI
@@ -124,10 +127,8 @@ hi LineNr ctermfg=grey
 hi NonText ctermfg=grey
 
 " Status line colors
-hi StatusLine ctermbg=white ctermfg=black
-"hi StatusLineNC ctermbg=white ctermfg=black
-hi clear StatusLineNC
-hi TabLineFill ctermbg=darkgrey
+hi StatusLine ctermbg=0 cterm=bold
+hi StatusLineNC ctermbg=0 cterm=NONE
 
 " Custom color scheme
 hi Constant ctermfg=12
@@ -135,7 +136,7 @@ hi Constant ctermfg=12
 " Get rid of vertical fill chars, also color
 " vertical split a nicer color
 hi clear VertSplit
-set fillchars=""
+set fillchars=vert:\ 
 
 " Colorless gutter (same color as background)
 highlight clear SignColumn
@@ -259,8 +260,8 @@ let g:netrw_banner = 0
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_auto_trigger = 0
 let g:ycm_key_invoke_completion = '<C-x><C-o>'
-let g:ycm_error_symbol = 'er'
-let g:ycm_warning_symbol = 'wn'
+let g:ycm_error_symbol = '✕'
+let g:ycm_warning_symbol = '!'
 let g:ycm_enable_diagnostic_highlighting = 0
 
 
