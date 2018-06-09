@@ -127,8 +127,8 @@ hi LineNr ctermfg=grey
 hi NonText ctermfg=grey
 
 " Status line colors
-hi StatusLine ctermbg=NONE cterm=bold,underline
-hi StatusLineNC ctermbg=NONE cterm=underline
+hi StatusLine ctermbg=0 cterm=bold
+hi StatusLineNC ctermbg=0 cterm=none
 
 " Custom color scheme
 hi Constant ctermfg=12
@@ -136,14 +136,16 @@ hi Constant ctermfg=12
 " Get rid of vertical fill chars, also color
 " vertical split a nicer color
 hi clear VertSplit
+hi StatusLine ctermfg=white ctermbg=none
+hi StatusLineNC ctermfg=white ctermbg=none
+set fillchars=stl:\ ,vert:\ 
 set fillchars=vert:\ 
 
-" Colorless gutter (same color as background)
-highlight clear SignColumn
-
-" Colorless tab bar
-highlight clear TabLineFill
-highlight clear Tabline
+" Colorless tab bar and sign column
+"au VimEnter * hi clear TabLineFill Tabline SignColumn
+au VimEnter * hi clear Tabline
+au VimEnter * hi clear TabLineFill
+au VimEnter * hi clear SignColumn
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
