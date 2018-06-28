@@ -1,2 +1,8 @@
-escape ^Jj
-termcapinfo xterm* ti@:te@
+# remape control command to ctrl-space
+escape ^@a
+startup_message off
+defscrollback 10000
+bind X remove
+
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
