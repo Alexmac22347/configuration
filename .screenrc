@@ -1,8 +1,16 @@
-# remape control command to ctrl-space
 escape ^@a
 startup_message off
 defscrollback 10000
 bind X remove
 
 hardstatus alwayslastline
-hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+hardstatus string '%{= kW}[ %{W}%H %{w}][%= %{=kw}%?%-Lw%?%{b}(%{W}%n*%f%t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{w}][%{W}%Y-%m-%d %{W}%c %{w}]'
+
+# navigating regions with Ctrl-arrows
+bind h focus left
+bind j focus down
+bind k focus up
+bind l focus right
+
+caption string "%{03} "
+rendition so =00
