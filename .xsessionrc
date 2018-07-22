@@ -1,4 +1,4 @@
-#xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" -.5 # increase trackpoint sensitivity
+xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Profile Enabled" 0, 0
 xinput --set-prop "SynPS/2 Synaptics TouchPad" "Device Enabled" 0
 setxkbmap -option ctrl:nocaps
 xset r rate 240 40
