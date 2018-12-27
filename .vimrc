@@ -48,17 +48,10 @@ source ~/.vim/plugin/bclose.vim
 source ~/.vim/plugin/Rename.vim
 source ~/.vim/plugin/cscope_maps.vim
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-
-call vundle#end()
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Language Servers
+"""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -241,12 +234,8 @@ noremap <silent><c-p> :tabn<cr>
 " quickly switch to the shell
 noremap <leader>sh :sh<cr>
 
-" easy yank/paste from clipboard
-noremap <leader>y "+y
-noremap <leader>p "*p
-
-" open help in a new tab
-:cabbrev help tab help
+" paste last yanked thing
+noremap <leader>p "0p
 
 set pastetoggle=<F2>
 
@@ -255,16 +244,6 @@ set pastetoggle=<F2>
 " Netrw
 """"""""""""""""""""""""""""""""""""""""""""""""""
 let g:netrw_banner = 0
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-" YouCompleteMe
-""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_auto_trigger = 0
-let g:ycm_key_invoke_completion = '<C-x><C-o>'
-let g:ycm_error_symbol = 'er'
-let g:ycm_warning_symbol = 'wn'
-let g:ycm_enable_diagnostic_highlighting = 0
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
