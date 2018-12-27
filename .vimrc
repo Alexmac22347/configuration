@@ -34,6 +34,9 @@ set secure
 " Unicode OK
 set encoding=utf-8
 
+" Dont search inculde files when running autocomplete
+set complete-=i
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " GUI
@@ -46,12 +49,40 @@ set guioptions-=r
 """""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/plugin/bclose.vim
 source ~/.vim/plugin/Rename.vim
-source ~/.vim/plugin/cscope_maps.vim
 
+call plug#begin('~/.vim/plugged')
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Language Servers
 """""""""""""""""""""""""""""""""""""""""""""""""
+let g:lsp_signs_enabled = 1         " enable signs
+let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
+
+if executable('cquery')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'cquery',
+      \ 'cmd': {server_info->['cquery']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+   autocmd FileType cpp setlocal omnifunc=lsp#complete
+   autocmd FileType cpp setlocal signcolumn=yes
+endif
+
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+    autocmd FileType python setlocal omnifunc=lsp#complete
+    autocmd FileType python setlocal signcolumn=yes
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,7 +155,11 @@ hi StatusLine ctermbg=0 cterm=bold
 hi StatusLineNC ctermbg=0 cterm=none
 
 " Custom color scheme
-hi Constant ctermfg=12
+hi String ctermfg=12
+hi Character ctermfg=12
+hi Boolean ctermfg=12
+hi Float ctermfg=12
+hi Number ctermfg=12
 
 " Get rid of vertical fill chars, also color
 " vertical split a nicer color
@@ -136,9 +171,9 @@ set fillchars=vert:\ 
 
 " Colorless tab bar and sign column
 "au VimEnter * hi clear TabLineFill Tabline SignColumn
-au VimEnter * hi clear Tabline
-au VimEnter * hi clear TabLineFill
-au VimEnter * hi clear SignColumn
+hi Tabline ctermbg=none ctermfg=white cterm=none
+hi clear TabLineFill
+hi SignColumn ctermbg=none
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
