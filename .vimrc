@@ -248,14 +248,14 @@ nnoremap <silent><c-k> <c-w>k
 nnoremap <silent><c-j> <c-w>j
 
 " Easier buffer keys
-noremap <leader>bd :Kwbd<cr>
-noremap <c-n> :bp<cr>
-noremap <c-m> :bn<cr>
+nnoremap <leader>bd :bd<cr>
+nnoremap <c-n> :bn<cr>
+nnoremap <c-p> :bp<cr>
 
 " Useful mappings for managing tabs
-noremap <leader>te :tabedit 
-noremap <silent><c-o> :tabp<cr>
-noremap <silent><c-p> :tabn<cr>
+nnoremap <leader>te :tabedit 
+nnoremap <leader>tn :tabn<cr>
+nnoremap <leader>tp :tabp<cr>
 
 " Disable ex mode
 :map Q <Nop>
