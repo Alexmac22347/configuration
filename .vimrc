@@ -50,40 +50,6 @@ set guioptions-=r
 source ~/.vim/plugin/bclose.vim
 source ~/.vim/plugin/Rename.vim
 
-call plug#begin('~/.vim/plugged')
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-call plug#end()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""
-" Language Servers
-"""""""""""""""""""""""""""""""""""""""""""""""""
-let g:lsp_signs_enabled = 1         " enable signs
-let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-
-if executable('cquery')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'cquery',
-      \ 'cmd': {server_info->['cquery']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': { 'cacheDirectory': '/tmp/cquery/cache' },
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
-   autocmd FileType cpp setlocal omnifunc=lsp#complete
-   autocmd FileType cpp setlocal signcolumn=yes
-endif
-
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-    autocmd FileType python setlocal omnifunc=lsp#complete
-    autocmd FileType python setlocal signcolumn=yes
-endif
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " User Interface
@@ -144,6 +110,9 @@ set path+=**
 " Enable syntax highlighting
 syntax enable
 
+" Needed bc screen
+set background=dark
+
 " Grey line numbers
 hi LineNr ctermfg=grey
 
@@ -179,8 +148,7 @@ hi SignColumn ctermbg=none
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Files, Backups, and Undo
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Turn off backup. This vimrc is for projects
-" which should have git
+" Turn off backup.
 set nobackup
 set nowb
 set noswapfile
@@ -225,13 +193,6 @@ set statusline+=%L
 " Easy save
 nnoremap <leader>w :w<cr>
 
-" Open file explorer where the current file is
-nnoremap <leader>q :Ex<cr>
-
-" Remap increment and decrement to =/-
-nnoremap = <c-a>
-nnoremap - <c-x>
-
 " Remap ctrl-a/ctrl-e to go to start/end of line
 " But don't include newline in visual mode
 nnoremap <c-a> <Home>
@@ -252,19 +213,11 @@ nnoremap <leader>bd :bd<cr>
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
 
-" Useful mappings for managing tabs
-nnoremap <leader>te :tabedit 
-nnoremap <leader>tn :tabn<cr>
-nnoremap <leader>tp :tabp<cr>
-
 " Disable ex mode
 :map Q <Nop>
 
 " opens $MYVIMRC in a new tab
 :nmap <Leader>vim :tabedit $MYVIMRC<cr>
-
-" opens .local.vimrc in a new tab
-:nmap <Leader>local :tabedit .local.vimrc<cr>
 
 " quickly switch to the shell
 noremap <leader>sh :sh<cr>
