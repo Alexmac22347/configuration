@@ -45,6 +45,10 @@ set guioptions-=T
 set guioptions-=L
 set guioptions-=r
 set guifont=Terminus\ 12
+" These two options remove the padding
+" at the bottom when fullscreened
+set guioptions-=e
+set guiheadroom=0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
