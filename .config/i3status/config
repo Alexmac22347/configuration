@@ -7,12 +7,11 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = false
+        colors = true
         interval = 5
 }
 
 order += "volume master"
-order += "disk /"
 order += "wireless _first_"
 order += "battery all"
 order += "tztime local"
@@ -39,10 +38,6 @@ battery all {
 }
 
 tztime local {
-        format = "%a %b %d %I:%M %p"
-}
-
-disk "/" {
-        prefix_type = none_binary
-        format = "%used / %total GiB"
+       # format = "%a %b %d %I:%M %p"
+        format = "%Y-%m-%d %H:%M:%S"
 }

@@ -42,13 +42,42 @@ set complete-=i
 " GUI
 """""""""""""""""""""""""""""""""""""""""""""""""
 set guioptions-=T
+set guioptions-=L
 set guioptions-=r
+set guifont=Terminus\ 12
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
-source ~/.vim/plugin/bclose.vim
-source ~/.vim/plugin/Rename.vim
+call plug#begin('~/.vim/plugged')
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+call plug#end()
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Language Servers
+"""""""""""""""""""""""""""""""""""""""""""""""""
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+    autocmd FileType python setlocal omnifunc=lsp#complete
+    au FileType python setlocal signcolumn=yes
+endif
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+    au FileType c,cpp,objc,objcpp setlocal omnifunc=lsp#complete
+    au FileType c,cpp,objc,objcpp setlocal signcolumn=yes
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -110,8 +139,11 @@ set path+=**
 " Enable syntax highlighting
 syntax enable
 
-" Needed bc screen
-set background=dark
+if has("gui_running")
+    set background=light
+else
+    set background=dark
+endif
 
 " Grey line numbers
 hi LineNr ctermfg=grey
@@ -123,25 +155,19 @@ hi NonText ctermfg=grey
 hi StatusLine ctermbg=0 cterm=bold
 hi StatusLineNC ctermbg=0 cterm=none
 
-" Custom color scheme
-hi String ctermfg=12
-hi Character ctermfg=12
-hi Boolean ctermfg=12
-hi Float ctermfg=12
-hi Number ctermfg=12
-
 " Get rid of vertical fill chars, also color
 " vertical split a nicer color
 hi clear VertSplit
 hi StatusLine ctermfg=white ctermbg=none
-hi StatusLineNC ctermfg=white ctermbg=none
+hi StatusLineNC ctermfg=grey ctermbg=none
 set fillchars=stl:\ ,vert:\ 
 set fillchars=vert:\ 
 
 " Colorless tab bar and sign column
 "au VimEnter * hi clear TabLineFill Tabline SignColumn
-hi Tabline ctermbg=none ctermfg=white cterm=none
+hi Tabline ctermbg=none ctermfg=grey cterm=none
 hi clear TabLineFill
+hi clear SignColumn
 hi SignColumn ctermbg=none
 
 
@@ -193,15 +219,6 @@ set statusline+=%L
 " Easy save
 nnoremap <leader>w :w<cr>
 
-" Remap ctrl-a/ctrl-e to go to start/end of line
-" But don't include newline in visual mode
-nnoremap <c-a> <Home>
-nnoremap <c-e> <End>
-cnoremap <c-a> <Home>
-cnoremap <c-e> <End>
-vnoremap <c-a> <Home>
-vnoremap <c-e> <End>h
-
 " Easier window movement
 nnoremap <silent><c-l> <c-w>l
 nnoremap <silent><c-h> <c-w>h
@@ -219,13 +236,12 @@ nnoremap <c-p> :bp<cr>
 " opens $MYVIMRC in a new tab
 :nmap <Leader>vim :tabedit $MYVIMRC<cr>
 
-" quickly switch to the shell
-noremap <leader>sh :sh<cr>
-
 " paste last yanked thing
 noremap <leader>p "0p
 
 set pastetoggle=<F2>
+
+tmap <esc> <c-w>N
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
