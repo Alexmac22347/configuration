@@ -1,17 +1,23 @@
+# ctrl-space is escape
 escape ^@a
 startup_message off
 defscrollback 10000
+
+# easier keys
 bind X remove
-
-# navigating regions with Ctrl-arrows
-hardstatus alwayslastline
-hardstatus string '%= %{=kw}%?%-Lw%?%{b}(%{W}%n*%f%t%?(%u)%?%{b})%{w}%?%+Lw%?%?%= %{w}%S'
-
 bind h focus left
 bind j focus down
 bind k focus up
 bind l focus right
 
+# cool status line
+hardstatus alwayslastline
+hardstatus string '%S %{w}%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<'
+# thin lines
 caption string "%{03} "
 rendition so =00
+# more colors
 term screen-256color
+
+# dont leave programs like vim on the screen after exiting
+altscreen on
