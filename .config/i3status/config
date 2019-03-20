@@ -14,23 +14,24 @@ general {
 order += "volume master"
 order += "wireless _first_"
 order += "battery all"
+order += "cpu_usage"
 order += "tztime local"
 
 volume master {
-        format = "VOL: %volume"
-        format_muted = "VOL: %volume (mute)"
+        format = "vol: %volume"
+        format_muted = "vol: %volume (mute)"
         device = "default" 
         mixer = "Master"
         mixer_idx = 0
 }
 
 wireless _first_ {
-        format_up = "Wifi: %essid (%quality)"
-        format_down = "Wifi: down"
+        format_up = "wifi: %essid (%quality)"
+        format_down = "wifi: down"
 }
 
 battery all {
-        format = "BAT: %percentage %remaining %status"
+        format = "bat: %percentage %remaining"
         hide_seconds = true
         integer_battery_capacity = true
         status_BAT = ""
@@ -38,6 +39,9 @@ battery all {
 }
 
 tztime local {
-       # format = "%a %b %d %I:%M %p"
-        format = "%Y-%m-%d %H:%M:%S"
+        format = "%Y-%m-%d %I:%M %p"
+}
+
+cpu_usage {
+	format = "cpu: %usage"
 }
