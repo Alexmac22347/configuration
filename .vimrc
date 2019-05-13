@@ -55,8 +55,6 @@ set guiheadroom=0
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
 call plug#end()
 
 
