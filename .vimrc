@@ -55,38 +55,41 @@ set guiheadroom=0
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin('~/.vim/plugged')
+Plug 'natebosch/vim-lsc'
 call plug#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Language Servers
 """""""""""""""""""""""""""""""""""""""""""""""""
-if executable('pyls')
-    " pip install python-language-server
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ })
-    autocmd FileType python setlocal omnifunc=lsp#complete
-    au FileType python setlocal signcolumn=yes
-endif
-if executable('clangd')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd']},
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
-    au FileType c,cpp,objc,objcpp setlocal omnifunc=lsp#complete
-    au FileType c,cpp,objc,objcpp setlocal signcolumn=yes
-endif
+let g:lsc_server_commands = {
+  \ 'c': { 'command': 'ccls', 'suppress_stderr': v:true,
+  \   'message_hooks': {
+  \       'initialize': {
+  \         'initializationOptions':  {'cache': {'directory': '/tmp/ccls/cache'}},
+  \         'rootUri': {m, p ->lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json',expand('%:p') . ';'), ':p:h'))} 
+  \       },
+  \     },
+  \   },
+  \ 'cpp': { 'command': 'clangd', 'suppress_stderr': v:true},
+  \ 'python': 'pyls',
+  \ }
+
+let g:lsc_auto_map = {
+    \ 'GoToDefinition': '<C-]>',
+    \ 'FindReferences': 'gr',
+    \ 'ShowHover': 'K',
+    \ 'Completion': 'omnifunc',
+    \}
+
+let g:lsc_enable_autocomplete = v:false
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " User Interface
 """""""""""""""""""""""""""""""""""""""""""""""""
 " Enable mouse
-set mouse=a
+"set mouse=a
 
 " Disable line wrapping
 set nowrap
@@ -125,6 +128,7 @@ set scrolloff=10
 
 " Disable folding
 set nofoldenable
+"set foldmethod=indent
 
 set completeopt-=preview
 
@@ -228,7 +232,7 @@ nnoremap <silent><c-k> <c-w>k
 nnoremap <silent><c-j> <c-w>j
 
 " Easier buffer keys
-nnoremap <leader>bd :bd<cr>
+nnoremap <leader>bd :bp\|bd #<cr>
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
 
