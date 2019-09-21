@@ -77,8 +77,8 @@ let g:lsc_server_commands = {
 
 let g:lsc_auto_map = {
     \ 'GoToDefinition': '<C-]>',
-    \ 'FindReferences': 'gr',
-    \ 'ShowHover': 'K',
+    \ 'FindReferences': ',gr',
+    \ 'ShowHover': ',K',
     \ 'Completion': 'omnifunc',
     \}
 
@@ -156,16 +156,14 @@ hi LineNr ctermfg=grey
 
 " Grey tildes (where text ends)
 hi NonText ctermfg=grey
-
+"
 " Status line colors
-hi StatusLine ctermbg=0 cterm=bold
-hi StatusLineNC ctermbg=0 cterm=none
+hi StatusLine ctermbg=blue cterm=bold
+hi StatusLineNC ctermbg=darkblue cterm=none
 
 " Get rid of vertical fill chars, also color
 " vertical split a nicer color
 hi clear VertSplit
-hi StatusLine ctermfg=white ctermbg=none
-hi StatusLineNC ctermfg=grey ctermbg=none
 set fillchars=stl:\ ,vert:\ 
 set fillchars=vert:\ 
 
@@ -249,6 +247,10 @@ set pastetoggle=<F2>
 
 tmap <esc> <c-w>N
 
+nnoremap <C-W>O :call MaximizeToggle()<CR>
+nnoremap <C-W>o :call MaximizeToggle()<CR>
+nnoremap <C-W><C-O> :call MaximizeToggle()<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Netrw
@@ -270,3 +272,19 @@ autocmd!
     autocmd BufWritePost .local.vimrc source .local.vimrc
     autocmd FileType * setlocal formatoptions-=c formatoptions-=o formatoptions-=r
 augroup END " }
+
+function! MaximizeToggle()
+  if exists("s:maximize_session")
+    exec "source " . s:maximize_session
+    call delete(s:maximize_session)
+    unlet s:maximize_session
+    let &hidden=s:maximize_hidden_save
+    unlet s:maximize_hidden_save
+  else
+    let s:maximize_hidden_save = &hidden
+    let s:maximize_session = tempname()
+    set hidden
+    exec "mksession! " . s:maximize_session
+    only
+  endif
+endfunction
