@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/alex/Documents/network-table/src'
-let g:netrw_dirhist_2='/home/alex/Documents/network-table-js'
-let g:netrw_dirhist_3='/home/alex/Documents/CPEN391-module1/software/nios'
-let g:netrw_dirhist_4='/home/alex/Documents/network-table'

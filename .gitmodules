@@ -1,0 +1,3 @@
+[submodule "home/alex/.vim"]
+	path = home/alex/.vim
+	url = https://github.com/Alexmac22347/.vim.git
