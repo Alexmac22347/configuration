@@ -1,5 +1,5 @@
 # ctrl-space is escape
-escape ^@a
+# escape ^@a
 startup_message off
 defscrollback 10000
 

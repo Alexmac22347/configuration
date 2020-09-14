@@ -52,14 +52,6 @@ set guiheadroom=0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
-"""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#begin('~/.vim/plugged')
-Plug 'natebosch/vim-lsc'
-call plug#end()
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""
 " Language Servers
 """""""""""""""""""""""""""""""""""""""""""""""""
 let g:lsc_server_commands = {
