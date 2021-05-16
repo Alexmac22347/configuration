@@ -38,3 +38,6 @@ accessibility -> hide title of windows when maximized (on)
 accessibility -> automatically tile windows when moving toward the screen edge (off)
 disable compositor
 move taskbar to left side
+
+## firefox settings
+set ui.key.menuAccessKeyFocuses false (disable alt menu)
