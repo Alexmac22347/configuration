@@ -19,25 +19,25 @@ Install steam, minecraft.
 5. Trigger input method -> change to Ctrl+Alt+J
 
 ## keyboard repeat
-delay: 240
-speed: 40
+delay: 240  
+speed: 40  
 
 ## application shortcuts (keyboard)
-exo-open --launch TerminalEmulator  Ctrl+Alt+T
-xfce4-popup-whiskermenu Super+L
-xfce4-screenshooter -f Print
-xfce4-screenshooter -r Shift+Print
-xfce4-screenshooter -w Alt+Print
-xfce4-taskmanager Ctrl+Alt+Delete
-xflock4 Ctrl+Alt+L
-xkill Ctrl+Alt+X
+exo-open --launch TerminalEmulator  Ctrl+Alt+T  
+xfce4-popup-whiskermenu Super+L  
+xfce4-screenshooter -f Print  
+xfce4-screenshooter -r Shift+Print  
+xfce4-screenshooter -w Alt+Print  
+xfce4-taskmanager Ctrl+Alt+Delete  
+xflock4 Ctrl+Alt+L  
+xkill Ctrl+Alt+X  
 
 ## window manager tweaks + window manager + appearance
-change window manager to Daloa
-accessibility -> hide title of windows when maximized (on)
-accessibility -> automatically tile windows when moving toward the screen edge (off)
-disable compositor
-move taskbar to left side
+change window manager to Daloa  
+accessibility -> hide title of windows when maximized (on)  
+accessibility -> automatically tile windows when moving toward the screen edge (off)  
+disable compositor  
+move taskbar to left side  
 
 ## firefox settings
-set ui.key.menuAccessKeyFocuses false (disable alt menu)
+set ui.key.menuAccessKeyFocuses false (disable alt menu)  
