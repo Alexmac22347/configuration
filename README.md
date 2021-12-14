@@ -1,7 +1,7 @@
 # fresh install
 
-```apt-get remove --purge atril snapd parole pidgin```  
-```apt-get install vlc okular audacity screen vim git htop wireshark nmap fonts-terminus anki keepass2 gparted unclutter clangd-9 powertop```  
+```apt-get remove --purge atril snapd parole```  
+```apt-get install vlc okular audacity screen xinput vim git htop wireshark nmap fonts-terminus anki keepass2 gparted unclutter clangd-9 powertop```  
 ```git config --global core.editor vim```  
 ```git config --global user.name "alexmac22347"```  
 ```git config --global user.email "alexmac22347@protonmail.com"```  
@@ -41,3 +41,6 @@ move taskbar to left side
 
 ## firefox settings
 set ui.key.menuAccessKeyFocuses false (disable alt menu)  
+
+
+If window manager fails to start, try removing .xsessionrc.
