@@ -61,13 +61,13 @@ install tp-smapi-dkms (debian)
 create /etc/acpi/events/thinkpad-dock:  
 ```
 event=ibm/hotkey LEN0068:00 00000080 00006030
-action=su alex -c "/home/alex/bin/external-monitor dock"
+action=su alex -c "/home/alex/.local/bin/dock.sh"
 ``` 
 
 create /etc/acpi/events/thinkpad-undock:  
 ```
 event=ibm/hotkey LEN0068:00 00000080 00004011
-action=su alex -c "/home/alex/external-monitor undock"
+action=su alex -c "/home/alex/.local/bin/undock.sh"
 ```  
 
 ```
