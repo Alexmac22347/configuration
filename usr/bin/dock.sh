@@ -4,10 +4,8 @@ KEYBOARD_US="XKBMODEL=\"pc105\"\nXKBLAYOUT=\"us\"\nXKBVARIANT=\"\"\nXKBOPTIONS=\
 DOCKED=$(cat /sys/devices/platform/dock.2/docked)
 if [[ $DOCKED == "1" ]]; then
     echo -e $KEYBOARD_US > /etc/default/keyboard
-    notify-send "docked"
 elif [[ $DOCKED == "0" ]]; then
     echo -e $KEYBOARD_JP > /etc/default/keyboard
-    notify-send "undocked"
 fi
 
 udevadm trigger --subsystem-match=input --action=change
