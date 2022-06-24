@@ -37,6 +37,9 @@ set encoding=utf-8
 " Dont search inculde files when running autocomplete
 set complete-=i
 
+" persistent undo
+set undofile undodir=~/.vim/undo-dir 
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " GUI
@@ -44,7 +47,7 @@ set complete-=i
 set guioptions-=T
 set guioptions-=L
 set guioptions-=r
-set guifont=Terminus\ 12
+set guifont=Terminus\ (TTF)\ Medium\ 12
 " These two options remove the padding
 " at the bottom when fullscreened
 set guioptions-=e
@@ -55,14 +58,7 @@ set guiheadroom=0
 " Language Servers
 """""""""""""""""""""""""""""""""""""""""""""""""
 let g:lsc_server_commands = {
-  \ 'c': { 'command': 'ccls', 'suppress_stderr': v:true,
-  \   'message_hooks': {
-  \       'initialize': {
-  \         'initializationOptions':  {'cache': {'directory': '/tmp/ccls/cache'}},
-  \         'rootUri': {m, p ->lsc#uri#documentUri(fnamemodify(findfile('compile_commands.json',expand('%:p') . ';'), ':p:h'))} 
-  \       },
-  \     },
-  \   },
+  \ 'c': { 'command': 'clangd', 'suppress_stderr': v:true},
   \ 'cpp': { 'command': 'clangd', 'suppress_stderr': v:true},
   \ 'python': 'pyls',
   \ }
@@ -212,9 +208,6 @@ set statusline+=%L
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " Remappings
 """"""""""""""""""""""""""""""""""""""""""""""""""
-" Easy save
-nnoremap <leader>w :w<cr>
-
 " Easier window movement
 nnoremap <silent><c-l> <c-w>l
 nnoremap <silent><c-h> <c-w>h
@@ -222,6 +215,7 @@ nnoremap <silent><c-k> <c-w>k
 nnoremap <silent><c-j> <c-w>j
 
 " Easier buffer keys
+" this is failing to delete netrw buffers
 nnoremap <leader>bd :bp\|bd #<cr>
 nnoremap <c-n> :bn<cr>
 nnoremap <c-p> :bp<cr>
