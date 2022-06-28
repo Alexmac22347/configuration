@@ -1,3 +1,4 @@
+#!/bin/bash
 KEYBOARD_JP="XKBMODEL=\"pc105\"\nXKBLAYOUT=\"jp\"\nXKBVARIANT=\"\"\nXKBOPTIONS=\"ctrl:nocaps\"\n\nBACKSPACE=\"guess\""
 KEYBOARD_US="XKBMODEL=\"pc105\"\nXKBLAYOUT=\"us\"\nXKBVARIANT=\"\"\nXKBOPTIONS=\"ctrl:nocaps\"\n\nBACKSPACE=\"guess\""
 
