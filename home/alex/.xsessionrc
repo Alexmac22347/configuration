@@ -1,4 +1,5 @@
-xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Profile Enabled" 0, 0
-xinput --set-prop "SynPS/2 Synaptics TouchPad" "Device Enabled" 0
-xinput --set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" -.1
 unclutter &
+if [ -n "$DISPLAY" ]; then
+  xset b off
+fi
+
