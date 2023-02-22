@@ -1,0 +1,7 @@
+:root {
+    --tab-min-height: 30px !important;
+}
+
+#TabsToolbar {
+    height: var(--tab-min-height) !important;
+}

@@ -36,3 +36,6 @@ use elementary-xfce-icon-theme
 
 ## firefox settings
 set ui.key.menuAccessKeyFocuses false (disable alt menu)  
+set browser.compactmode.show true (allow compact mode)
+set browser.uidensity 1 (set compact mode)
+set toolkit.legacyUserProfileCustomizations.stylesheets true (allow userChrome.css)
