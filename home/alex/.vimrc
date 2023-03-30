@@ -134,20 +134,17 @@ set path+=**
 " Enable syntax highlighting
 syntax enable
 
-" if has("gui_running")
-"     set background=dark
-" else
-    set background=dark
-" endif
-
 colorscheme industry
 
+hi Normal ctermfg=none guifg=white
+hi Type guifg=lightgreen gui=none
+
 " Grey line numbers
-hi LineNr ctermfg=grey
+hi LineNr ctermfg=grey guifg=grey
 
 " Grey tildes (where text ends)
-hi NonText ctermfg=grey
-"
+hi NonText ctermfg=grey guifg=grey
+
 " Status line colors
 hi StatusLine ctermbg=blue cterm=bold
 hi StatusLineNC ctermbg=darkblue cterm=none
