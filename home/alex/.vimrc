@@ -47,7 +47,8 @@ set undofile undodir=~/.vim/undo-dir
 set guioptions-=T
 set guioptions-=L
 set guioptions-=r
-set guifont=Terminus\ (TTF)\ Medium\ 12
+" set guifont=Terminus\ (TTF)\ Medium\ 12
+set guifont=Fixedsys\ Excelsior\ 3.01-L2\ Mono\ 12
 " These two options remove the padding
 " at the bottom when fullscreened
 set guioptions-=e
@@ -133,11 +134,13 @@ set path+=**
 " Enable syntax highlighting
 syntax enable
 
-if has("gui_running")
-    set background=light
-else
+" if has("gui_running")
+"     set background=dark
+" else
     set background=dark
-endif
+" endif
+
+colorscheme industry
 
 " Grey line numbers
 hi LineNr ctermfg=grey
