@@ -119,5 +119,20 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+
 # show the git branch
 export PS1="\${debian_chroot:+(\$debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[$txtcyn\]\$git_branch\[$txtcyn\]\$git_dirty\[$txtrst\]\$ "
+
+export PATH=$PATH:/home/alex/.local/bin/
+
+# enable this to have terminal in english
+# export LANG=en_CA.UTF-8
+# export LANGUAGE=en
+
+# just make man pages be in english
+alias man='LANG=C man'
