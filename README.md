@@ -46,7 +46,12 @@ sudo apt-get remove --purge ibus
 sudo apt-get install fcitx fcitx-mozc
 ```
 logout -> login  
-fcitx -> remove current input and set mozc as the input  
+fcitx -> remove current input and set mozc as the input
+change system UI language:
+```
+sudo dpkg-reconfigure locales
+```
+select ja_JP.UTF-8
 
 ## keyboard repeat
 delay: 280  
@@ -78,3 +83,7 @@ set browser.uidensity 1 (set compact mode)
 set toolkit.legacyUserProfileCustomizations.stylesheets true (allow userChrome.css)
 
 change search engine to yahoo japan or preferred search. change homepage to yahoo.co.jp or preferred homje
+
+
+## files manage
+add download/documents to favourites
