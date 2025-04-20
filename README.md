@@ -1,13 +1,13 @@
 # fresh install
 
 ```apt-get remove --purge atril snapd parole```  
-```apt-get install xserver-xorg-input-synaptics xfce4-whiskermenu-plugin easytag tinc vlc okular audacity screen xinput vim git htop wireshark nmap fonts-terminus anki keepass2 gparted unclutter clangd-9 powertop```  
+```apt-get install xserver-xorg-input-synaptics xfce4-whiskermenu-plugin easytag tinc vlc okular audacity screen xinput vim git htop fonts-terminus keepass2 unclutter powertop```  
 ```git config --global core.editor vim```  
-```git config --global user.name "alexmac22347"```  
-```git config --global user.email "alexmac22347@protonmail.com"```  
+```git config --global user.name "aikm94"```  
+```git config --global user.email "aikm94@ymail.ne.jp"```  
 ```git config --global pull.rebase true```   
 
-Install steam, minecraft, discord, zoom
+Install steam, minecraft, discord, zoom, anki
 
 update default editor  
 '''sudo update-alternatives --config editor'''
@@ -76,3 +76,5 @@ set ui.key.menuAccessKeyFocuses false (disable alt menu)
 set browser.compactmode.show true (allow compact mode)
 set browser.uidensity 1 (set compact mode)
 set toolkit.legacyUserProfileCustomizations.stylesheets true (allow userChrome.css)
+
+change search engine to yahoo japan or preferred search. change homepage to yahoo.co.jp or preferred homje
