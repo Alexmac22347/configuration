@@ -1,7 +1,7 @@
 # fresh install
 
 ```apt-get remove --purge atril snapd parole```  
-```apt-get install xserver-xorg-input-synaptics xfce4-whiskermenu-plugin easytag tinc vlc okular audacity screen xinput vim git htop fonts-terminus keepass2 unclutter powertop```  
+```apt-get install fonts-noto-cjk xserver-xorg-input-synaptics xfce4-whiskermenu-plugin easytag tinc vlc okular audacity screen xinput vim git htop fonts-terminus keepass2 unclutter powertop```  
 ```git config --global core.editor vim```  
 ```git config --global user.name "aikm94"```  
 ```git config --global user.email "aikm94@ymail.ne.jp"```  
@@ -42,7 +42,6 @@ xfce terminal settings
 
 ## Japanese setup  
 ```
-sudo apt-get remove --purge ibus
 sudo apt-get install fcitx fcitx-mozc
 ```
 logout -> login  
@@ -82,7 +81,8 @@ set browser.compactmode.show true (allow compact mode)
 set browser.uidensity 1 (set compact mode)
 set toolkit.legacyUserProfileCustomizations.stylesheets true (allow userChrome.css)
 
-change search engine to yahoo japan or preferred search. change homepage to yahoo.co.jp or preferred homje
+right click on bookmark toolbar and set it to always show.
+change search engine to yahoo japan or preferred search. change homepage to yahoo.co.jp or preferred home
 
 
 ## files manage
