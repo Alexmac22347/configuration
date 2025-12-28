@@ -1,13 +1,19 @@
 # fresh install
+gvfs-backends - make phone show up as usb device
+fonts-noto-cjk - normal looking japanese font
+xserver-xorg-input-synaptics - circular scrolling (maybe not needed?)
 
 ```apt-get remove --purge atril snapd parole```  
-```apt-get install fonts-noto-cjk xserver-xorg-input-synaptics xfce4-whiskermenu-plugin easytag tinc vlc okular audacity screen xinput vim git htop fonts-terminus keepass2 unclutter powertop```  
+```apt-get install blueman gvfs-backends fonts-noto-cjk xserver-xorg-input-synaptics xfce4-whiskermenu-plugin easytag tinc vlc okular audacity screen xinput vim git htop fonts-terminus keepass2 unclutter powertop```  
 ```git config --global core.editor vim```  
 ```git config --global user.name "aikm94"```  
 ```git config --global user.email "aikm94@ymail.ne.jp"```  
 ```git config --global pull.rebase true```   
 
-Install steam, minecraft, discord, zoom, anki
+Install steam, minecraft, anki (version 25.02, latest version breaks fcitx/japanese input), reaper
+
+
+https://askubuntu.com/questions/479465/how-can-i-disable-alt-scroll-zoom-in-xfce4-xubuntu
 
 update default editor  
 '''sudo update-alternatives --config editor'''
@@ -81,6 +87,7 @@ set browser.compactmode.show true (allow compact mode)
 set browser.uidensity 1 (set compact mode)
 set toolkit.legacyUserProfileCustomizations.stylesheets true (allow userChrome.css)
 
+https://support.mozilla.org/en-US/kb/compact-mode-workaround-firefox
 right click on bookmark toolbar and set it to always show.
 change search engine to yahoo japan or preferred search. change homepage to yahoo.co.jp or preferred home
 
