@@ -86,6 +86,7 @@ set ui.key.menuAccessKeyFocuses false (disable alt menu)
 set browser.compactmode.show true (allow compact mode)
 set browser.uidensity 1 (set compact mode)
 set toolkit.legacyUserProfileCustomizations.stylesheets true (allow userChrome.css)
+set browser.tabs.hoverPreview.enabled false (disable showing tab preview on hover)
 
 https://support.mozilla.org/en-US/kb/compact-mode-workaround-firefox
 right click on bookmark toolbar and set it to always show.
