@@ -4,7 +4,7 @@ fonts-noto-cjk - normal looking japanese font
 xserver-xorg-input-synaptics - circular scrolling (maybe not needed?)
 
 ```apt-get remove --purge atril snapd parole```  
-```apt-get install blueman gvfs-backends fonts-noto-cjk xserver-xorg-input-synaptics xfce4-whiskermenu-plugin easytag tinc vlc okular audacity screen xinput vim git htop fonts-terminus keepass2 unclutter powertop```  
+```apt-get install blueman gvfs-backends fonts-noto-cjk xserver-xorg-input-synaptics xfce4-whiskermenu-plugin easytag tinc vlc okular audacity screen xinput vim git htop fonts-terminus xfonts-terminus keepass2 unclutter powertop```  
 ```git config --global core.editor vim```  
 ```git config --global user.name "aikm94"```  
 ```git config --global user.email "aikm94@ymail.ne.jp"```  
@@ -45,6 +45,10 @@ xfce terminal settings
  - settings -> appearance -> display menubar in new windows -> uncheck
  - settings -> advanced -> shortcuts -> disable all
  - righclick terminal -> disable menubar
+
+## Using terminus font
+can set terminal, system font to terminus (NOT terminus TTF)
+can use Terminus TTF for Godot
 
 ## Japanese setup  
 ```
