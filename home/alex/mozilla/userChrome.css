@@ -1,7 +1,74 @@
 :root {
-    --tab-min-height: 30px !important;
+    --tab-min-height: 28px !important;
 }
 
 #TabsToolbar {
     height: var(--tab-min-height) !important;
+}
+
+/* Specific UI elements */
+#urlbar, .searchbar-textbox {
+    font-family: "Terminus", monospace !important;
+    font-size: 10pt !important;
+}
+
+.tab-text, .tab-label {
+    font-family: "Terminus", monospace !important;
+    font-size: 10pt !important;
+}
+
+/* Menu items */
+menuitem, menu, menubar {
+    font-family: "Terminus", monospace !important;
+    font-size: 10pt !important;
+}
+
+/* Bookmark toolbar and items */
+#PlacesToolbar,
+#PlacesToolbar > hbox,
+#PersonalToolbar,
+#personal-bookmarks,
+#bookmarks-bar,
+toolbarbutton.bookmark-item,
+#PlacesToolbarItems > .bookmark-item,
+.bookmark-item > .toolbarbutton-text,
+.bookmark-item,
+#personal-bookmarks toolbarbutton {
+    font-family: "Terminus", monospace !important;
+    font-size: 10pt !important;
+    font-weight: normal !important;
+}
+
+/* Bookmark folder labels */
+.bookmark-item[container="true"] .toolbarbutton-text {
+    font-family: "Terminus", monospace !important;
+    font-size: 10pt !important;
+}
+
+/* Bookmark toolbar button (the bookmark star) */
+#star-button-box,
+#star-button {
+    font-family: "Terminus", monospace !important;
+}
+
+/* Dropdown bookmarks menu */
+#bookmarksMenu,
+#bookmarksMenu > menupopup,
+#bookmarksMenu menuitem,
+#bookmarksMenu menu {
+    font-family: "Terminus", monospace !important;
+    font-size: 10pt !important;
+}
+
+/* Bookmarks sidebar */
+#sidebar-box[sidebarcommand="viewBookmarksSidebar"],
+#sidebar,
+#bookmarksPanel {
+    font-family: "Terminus", monospace !important;
+    font-size: 10pt !important;
+}
+
+#bookmarks-view treechildren::-tree-cell {
+    font-family: "Terminus", monospace !important;
+    font-size: 10pt !important;
 }
